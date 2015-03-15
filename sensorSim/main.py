@@ -12,6 +12,8 @@ from socket import error as socket_error
 import tkinter as tk
 import tkinter.scrolledtext as tkst
 
+import random as rand
+
 HOST, PORT = "localhost", 9999
 status = "NORMAL"
 
@@ -23,7 +25,8 @@ def update():
     if status == "NORMAL":
       
         timeStr = time.strftime("%c",time.localtime(time.time()))
-        messageStr = timeStr + ",12.35,2.5\n"
+        hVoltage = '%.2f' % (12.0 + (12.35 * rand.random())/50)
+        messageStr = timeStr + ","+ hVoltage +",2.5\n"
         alarmText.insert(1.0, messageStr)
         alarmText.after(1000,update)
             
