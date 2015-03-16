@@ -19,17 +19,17 @@ status = "NORMAL"
 
 
 def update():
-  
+
     global status
-  
+
     if status == "NORMAL":
-      
+
         timeStr = time.strftime("%c",time.localtime(time.time()))
         hVoltage = '%.2f' % (12.0 + (12.35 * rand.random())/50)
-        messageStr = timeStr + ","+ hVoltage +",2.5\n"
+        messageStr = timeStr + ","+ hVoltage +",2.5,13.0\n"
         alarmText.insert(1.0, messageStr)
         alarmText.after(1000,update)
-            
+
         #send information out on serial address
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -43,11 +43,8 @@ def update():
             status = "NOT NORMAL"
             alarmText.after(10000,update)
             return None
-        
     status = "NORMAL"
-            
-        
-    
+
 if __name__ == "__main__":
 
 
